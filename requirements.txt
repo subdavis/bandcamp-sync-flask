@@ -1,0 +1,4 @@
+flask>=3.0.0
+gunicorn>=23.0.0
+curl_cffi>=0.5.0
+bandcampsync @ git+https://github.com/meeb/bandcampsync.git@main

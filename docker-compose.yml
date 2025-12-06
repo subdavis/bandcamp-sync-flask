@@ -1,0 +1,14 @@
+services:
+  bandcampsync-web:
+    build: .
+    container_name: bandcampsync-web
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mount your config file
+      - ./config.json:/app/config.json:ro,z
+      # Mount your downloads directory
+      - ~/Music/Bandcamp:/downloads:z
+    environment:
+      - CONFIG_PATH=/app/config.json
+    restart: unless-stopped

@@ -13,10 +13,6 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
-# Install tini for proper signal handling (tiny ~30KB init)
-RUN apt-get update && apt-get install -y --no-install-recommends tini \
-    && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /app
 
 # Create directories for config and downloads

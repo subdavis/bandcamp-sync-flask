@@ -1,6 +1,6 @@
 # BandcampSync Web Interface
 
-A simple Flask web interface for running [BandcampSync](https://github.com/meeb/bandcampsync/) with real-time log streaming. Runs well alongside [beets-flask](https://github.com/pSpitzner/beets-flask)
+A simple Flask web interface for running [BandcampSync](https://github.com/meeb/bandcampsync/) with real-time log streaming. Designed to run well alongside [beets-flask](https://github.com/pSpitzner/beets-flask)
 
 ![Screenshot](./docs/screenshot.png)
 
@@ -54,6 +54,10 @@ Create a `config.json` file with your BandcampSync settings:
 - `ignore_patterns`: Space-separated list of artists to ignore
 - `temp_dir`: Temporary download directory
 - `notify_url`: URL to notify when sync completes
+
+## Wait, _another_ service to run?
+
+It idles around 24M of RAM usage.  That's about all you can ask for with Python/Flask.
 
 ## Limitations
 

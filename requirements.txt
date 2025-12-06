@@ -1,4 +1,4 @@
 flask>=3.0.0
 gunicorn>=23.0.0
 curl_cffi>=0.5.0
-bandcampsync @ git+https://github.com/meeb/bandcampsync.git@main
+bandcampsync @ git+https://github.com/meeb/bandcampsync.git@32764977ed33bb83347dd7aae287b413f70e5b75

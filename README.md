@@ -1,6 +1,8 @@
 # BandcampSync Web Interface
 
-A simple Flask web interface for running BandcampSync with real-time log streaming.
+A simple Flask web interface for running [BandcampSync](https://github.com/meeb/bandcampsync/) with real-time log streaming. Runs well alongside [beets-flask](https://github.com/pSpitzner/beets-flask)
+
+![Screenshot](./docs/screenshot.png)
 
 ## Setup
 
@@ -21,6 +23,10 @@ A simple Flask web interface for running BandcampSync with real-time log streami
    ```
 
 1. Open http://127.0.0.1:5000 in your browser
+
+## Docker
+
+See [docker-compose.yml](./docker-compose.yml)
 
 ## Configuration
 

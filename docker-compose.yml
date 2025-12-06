@@ -2,6 +2,7 @@ services:
   bandcampsync-web:
     build: .
     container_name: bandcampsync-web
+    init: true # Important! Use tini to handle signals properly
     ports:
       - "5000:5000"
     volumes:

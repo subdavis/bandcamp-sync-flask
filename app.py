@@ -15,7 +15,7 @@ app = Flask(__name__)
 # Global state for the running job
 running_job = {
     'process': None,
-    'logs': deque(maxlen=1000),  # Keep last 1000 log lines
+    'logs': deque(maxlen=500),  # Keep last 500 log lines (reduced for memory)
     'status': 'idle',  # idle, running, completed, failed, aborted
     'start_time': None
 }
@@ -220,7 +220,7 @@ def stream_logs():
     
     response = Response(generate(), mimetype='text/event-stream')
     response.headers['Cache-Control'] = 'no-cache'
-    response.headers['Connection'] = 'keep-alive'
+    response.headers['X-Accel-Buffering'] = 'no'
     return response
 
 

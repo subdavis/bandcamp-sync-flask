@@ -1,17 +1,29 @@
-FROM python:3.12-bookworm
+# Build stage: use full image with git to install dependencies
+FROM python:3.12-bookworm AS builder
+
+WORKDIR /build
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir --target=/build/deps -r requirements.txt
+
+# Runtime stage: slim image without git
+FROM python:3.12-slim-bookworm
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
+
+# Install tini for proper signal handling (tiny ~30KB init)
+RUN apt-get update && apt-get install -y --no-install-recommends tini \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
 # Create directories for config and downloads
 RUN mkdir -p /config /downloads
 
-# Copy requirements and install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Copy installed dependencies from builder
+COPY --from=builder /build/deps /usr/local/lib/python3.12/site-packages/
 
 # Copy application code
 COPY app.py .
@@ -21,7 +33,6 @@ COPY templates templates/
 # Expose the web interface port
 EXPOSE 5000
 
-# Use single worker gunicorn to preserve global state
-# --threads 4 allows concurrent requests while sharing global state
-# --timeout 0 disables worker timeout for long-running sync jobs
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--threads", "4", "--timeout", "0", "app:app"]
+# Use waitress for lower memory footprint
+# Single-threaded async server, lighter than gunicorn for simple apps
+CMD ["python", "-m", "waitress", "--host", "0.0.0.0", "--port", "5000", "--threads", "2", "app:app"]

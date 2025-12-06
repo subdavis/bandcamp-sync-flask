@@ -31,6 +31,8 @@ A simple Flask web interface for running [BandcampSync](https://github.com/meeb/
 
 ## Docker
 
+`docker pull ghcr.io/subdavis/bandcamp-sync-flask`
+
 See [docker-compose.yml](./docker-compose.yml)
 
 ## Configuration

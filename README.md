@@ -2,22 +2,27 @@
 
 A simple Flask web interface for running [BandcampSync](https://github.com/meeb/bandcampsync/) with real-time log streaming. Designed to run well alongside [beets-flask](https://github.com/pSpitzner/beets-flask)
 
-![Screenshot](./docs/screenshot.png)
+| Web                                  | Mobile                      |
+| ------------------------------------ | --------------------------- |
+| ![Screenshot](./docs/screenshot.png) | ![Phone](./docs/phone.jpeg) |
 
 ## Setup
 
 1. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 1. Create your configuration file:
+
    ```bash
    cp config.example.json config.json
    # Edit config.json with your settings
    ```
 
 1. Run the web interface with your config:
+
    ```bash
    python app.py config.json
    ```
@@ -45,10 +50,12 @@ Create a `config.json` file with your BandcampSync settings:
 ```
 
 **Required fields:**
+
 - `cookies`: Your Bandcamp session cookies string (not a file path)
 - `directory`: Path to your music directory
 
 **Optional fields:**
+
 - `format`: Audio format (default: "flac")
 - `ignore_file`: Path to file with ignore patterns
 - `ignore_patterns`: Space-separated list of artists to ignore
@@ -57,7 +64,7 @@ Create a `config.json` file with your BandcampSync settings:
 
 ## Wait, _another_ service to run?
 
-It idles around 24M of RAM usage.  That's about all you can ask for with Python/Flask.
+It idles around 24M of RAM usage. That's about all you can ask for with Python/Flask.
 
 ## Limitations
 

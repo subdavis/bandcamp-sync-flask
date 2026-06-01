@@ -11,6 +11,7 @@ import argparse
 from pathlib import Path
 
 from bandcampsync import version, do_sync
+from bandcampsync.options import BandcampSyncOptions
 from bandcampsync.logger import get_logger
 
 
@@ -73,7 +74,15 @@ def main():
     log.info(f'BandcampSync v{version} starting (container mode)')
     log.info(f'Cookies loaded from command line argument')
     
-    do_sync(cookies, dir_path, media_format, temp_dir, ign_file_path, ign_patterns, notify_url)
+    do_sync(BandcampSyncOptions(
+        cookies=cookies,
+        dir_path=dir_path,
+        media_format=media_format,
+        temp_dir_root=temp_dir,
+        ign_file_path=ign_file_path,
+        ign_patterns=ign_patterns,
+        notify_url=notify_url,
+    ))
     log.info('Done')
 
 
